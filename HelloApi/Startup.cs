@@ -41,8 +41,13 @@ namespace HelloApi
                 app.UseDeveloperExceptionPage();
             }
 
+            string prefix = "";
+            if (env.IsProduction())
+            {
+                prefix = "/api";
+            }
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HelloApi v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint(prefix + "/swagger/v1/swagger.json", "HelloApi v1"));
 
             app.UseHttpsRedirection();
 
